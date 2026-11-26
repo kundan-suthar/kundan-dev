@@ -10,7 +10,7 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-    company: "Capfront Technologies", role: "Software Engineer / AI Full Stack Developer", start: "November 2025", end: "Present", location: "Bengaluru, Karnataka",
+    company: "Capfront Technologies", role: "Software Engineer / AI Full Stack Developer", start: "November 2025", end: "Present", location: "Bengaluru, Karnataka", logo: "/capfrontlo.png",
     groups: [{ bullets: [
       "Improved React application load times by ==~30%== through memoization and lazy loading.",
       "Built asynchronous FastAPI REST services to support high-concurrency requests.",
@@ -20,7 +20,7 @@ export const experience: Experience[] = [
     ] }],
   },
   {
-    company: "New Era Tech", role: "AI Full Stack Engineer", start: "May 2023", end: "November 2025", location: "Pune, Maharashtra",
+    company: "New Era Tech", role: "AI Full Stack Engineer", start: "May 2023", end: "November 2025", location: "Pune, Maharashtra", logo: "/newera-favicon.webp",
     groups: [{ bullets: [
       "Reduced initial page load time by ==~35%== using Next.js server-side rendering, static generation, and route-based code splitting.",
       "Translated ==15+== Figma screens into responsive, mobile-first interfaces with Tailwind CSS and Material UI.",

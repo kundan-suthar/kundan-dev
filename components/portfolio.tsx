@@ -13,7 +13,36 @@ function Highlight({ text }: { text: string }) {
 }
 
 export function ExperienceItem({ item }: { item: Experience }) {
-  return <article className="experience-item"><div className="company-mark" aria-hidden="true">{item.company.slice(0, 1)}</div><div className="experience-main"><div className="experience-heading"><div><h3>{item.company}</h3><p className="muted">{item.role}</p></div><p className="date">{item.start} – {item.end}</p></div><p className="location muted">{item.location}</p>{item.groups.map((group, index) => <div className="experience-group" key={index}>{group.project && <h4>{group.project}</h4>}<ul>{group.bullets.map((bullet) => <li key={bullet}><Highlight text={bullet} /></li>)}</ul></div>)}</div></article>;
+  return (
+    <article className="experience-item">
+      <div className="company-mark" aria-hidden="true">
+        {item.logo ? <img src={item.logo} alt="" /> : item.company.slice(0, 1)}
+      </div>
+      <details className="experience-details">
+        <summary className="experience-heading">
+          <span className="experience-heading-main">
+            <h3>{item.company}</h3>
+            <span className="muted">{item.role}</span>
+          </span>
+          <span className="experience-heading-side">
+            <span className="date">{item.start} – {item.end}</span>
+            <span className="experience-arrow" aria-hidden="true">›</span>
+          </span>
+        </summary>
+        <div className="experience-content">
+          <p className="location muted">{item.location}</p>
+          {item.groups.map((group, index) => (
+            <div className="experience-group" key={index}>
+              {group.project && <h4>{group.project}</h4>}
+              <ul>
+                {group.bullets.map((bullet) => <li key={bullet}><Highlight text={bullet} /></li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </details>
+    </article>
+  );
 }
 
 export function ProjectItem({ project }: { project: Project }) {
