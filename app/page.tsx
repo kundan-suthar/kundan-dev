@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import Link from "next/link";
+import { io } from "next/cache";
 import { site } from "@/data/site";
 import { experience } from "@/data/experience";
 import { projects } from "@/data/projects";
@@ -10,6 +12,11 @@ import {
   SocialLinks,
 } from "@/components/portfolio";
 import { ThemeToggle } from "@/components/theme-toggle";
+
+async function CopyrightYear() {
+  await io();
+  return <p>© {new Date().getFullYear()} {site.name}</p>;
+}
 
 export default function Home() {
   // const latestPosts = getBlogPosts().slice(0, 3);
@@ -115,7 +122,9 @@ export default function Home() {
         </Section>
         <footer className="site-footer">
           <SocialLinks footer />
-          <p>© 2026 {site.name}</p>
+          <Suspense fallback={<p>© {site.name}</p>}>
+            <CopyrightYear />
+          </Suspense>
           <Link className="text-link" href="/resume">
             Resume
           </Link>
