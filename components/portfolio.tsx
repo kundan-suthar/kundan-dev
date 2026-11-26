@@ -1,5 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { IoDocumentTextSharp } from "react-icons/io5";
+import { MdEmail } from "react-icons/md";
 import { site } from "@/data/site";
 import type { Experience } from "@/data/experience";
 import type { Project } from "@/data/projects";
@@ -42,8 +45,32 @@ export function ExperienceItem({ item }: { item: Experience }) {
       <details className="experience-details">
         <summary className="experience-heading">
           <span className="experience-heading-main">
-            <h3>{item.company}</h3>
-            <span className="muted">{item.role}</span>
+            <h3>
+              {item.mobileCompany ? (
+                <>
+                  <span className="experience-desktop-label">
+                    {item.company}
+                  </span>
+                  <span className="experience-mobile-label">
+                    {item.mobileCompany}
+                  </span>
+                </>
+              ) : (
+                item.company
+              )}
+            </h3>
+            <span className="muted">
+              {item.mobileRole ? (
+                <>
+                  <span className="experience-desktop-label">{item.role}</span>
+                  <span className="experience-mobile-label">
+                    {item.mobileRole}
+                  </span>
+                </>
+              ) : (
+                item.role
+              )}
+            </span>
           </span>
           <span className="experience-heading-side">
             <span className="date">
@@ -76,15 +103,19 @@ export function ExperienceItem({ item }: { item: Experience }) {
 
 export function ProjectItem({ project }: { project: Project }) {
   return (
-    <article className="project-item">
-      <div className="project-title-row">
-        <Link href={`/projects/${project.slug}`} className="item-link">
-          {project.title}
-        </Link>
-        {project.status && <span className="badge">{project.status}</span>}
-      </div>
-      <p className="muted">{project.description}</p>
-    </article>
+    <Link
+      href={`/projects/${project.slug}`}
+      className="project-item"
+      aria-label={`View ${project.title} project`}
+    >
+      <article>
+        <div className="project-title-row">
+          <span className="item-link">{project.title}</span>
+          {project.status && <span className="badge">{project.status}</span>}
+        </div>
+        <p className="muted">{project.description}</p>
+      </article>
+    </Link>
   );
 }
 
@@ -105,10 +136,10 @@ export function PostItem({ post }: { post: BlogPost }) {
 }
 
 const socials = [
-  { label: "LinkedIn", href: site.links.linkedin, icon: "in" },
-  { label: "GitHub", href: site.links.github, icon: "⌘" },
-  { label: "Email", href: `mailto:${site.email}`, icon: "✉" },
-  { label: "Resume", href: site.resume, icon: "▤" },
+  { label: "LinkedIn", href: site.links.linkedin, icon: <FaLinkedin /> },
+  { label: "GitHub", href: site.links.github, icon: <FaGithub /> },
+  { label: "Email", href: `mailto:${site.email}`, icon: <MdEmail /> },
+  { label: "Resume", href: site.resume, icon: <IoDocumentTextSharp /> },
 ];
 export function SocialLinks({ footer = false }: { footer?: boolean }) {
   return (

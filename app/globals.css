@@ -184,6 +184,9 @@ h3 {
 .location {
   margin: 2px 0 0;
 }
+.experience-mobile-label {
+  display: none;
+}
 .date {
   flex-shrink: 0;
   margin: 0;
@@ -211,7 +214,9 @@ li strong {
   color: var(--fg);
 }
 .project-item {
+  display: block;
   margin: 0 0 15px;
+  cursor: pointer;
 }
 .project-title-row {
   display: flex;
@@ -459,8 +464,16 @@ li strong {
   transform: translate(-50%, 0);
 }
 @media (max-width: 520px) {
+  .experience-desktop-label {
+    display: none;
+  }
+  .experience-mobile-label {
+    display: inline;
+  }
   .container {
     width: min(100% - 36px, 680px);
+    padding-inline: 0;
+    border-inline: 0;
   }
   .site-header {
     padding-top: 42px;

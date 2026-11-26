@@ -1,6 +1,8 @@
 export type Experience = {
   company: string;
+  mobileCompany?: string;
   role: string;
+  mobileRole?: string;
   start: string;
   end: string;
   location: string;
@@ -11,7 +13,9 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     company: "Capfront Technologies",
+    mobileCompany: "Capfront Tech",
     role: "Software Engineer / AI Full Stack Developer",
+    mobileRole: "AI Full Stack Engineer",
     start: "November 2025",
     end: "Present",
     location: "Bengaluru, Karnataka",

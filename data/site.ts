@@ -20,8 +20,8 @@ export const site = {
   email: "kundanss22@gmail.com",
   phone: "+91 9762611679",
   links: {
-    linkedin: "TODO: Add LinkedIn profile URL",
-    github: "TODO: Add GitHub profile URL",
+    linkedin: "https://www.linkedin.com/in/kundan-suthar/",
+    github: "https://github.com/kundan-suthar",
     portfolio: "TODO: Add preferred portfolio domain",
     booking: "mailto:kundanss22@gmail.com",
   },
