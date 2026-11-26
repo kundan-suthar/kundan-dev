@@ -1,0 +1,36 @@
+import Link from "next/link";
+import type { ReactNode } from "react";
+import { site } from "@/data/site";
+import type { Experience } from "@/data/experience";
+import type { Project } from "@/data/projects";
+
+export function Section({ title, children, id }: { title: string; children: ReactNode; id?: string }) {
+  return <section className="section" id={id}><h2 className="section-title">{title}</h2>{children}</section>;
+}
+
+function Highlight({ text }: { text: string }) {
+  return <>{text.split(/==(.*?)==/g).map((part, index) => index % 2 ? <strong key={index}>{part}</strong> : part)}</>;
+}
+
+export function ExperienceItem({ item }: { item: Experience }) {
+  return <article className="experience-item"><div className="company-mark" aria-hidden="true">{item.company.slice(0, 1)}</div><div className="experience-main"><div className="experience-heading"><div><h3>{item.company}</h3><p className="muted">{item.role}</p></div><p className="date">{item.start} – {item.end}</p></div><p className="location muted">{item.location}</p>{item.groups.map((group, index) => <div className="experience-group" key={index}>{group.project && <h4>{group.project}</h4>}<ul>{group.bullets.map((bullet) => <li key={bullet}><Highlight text={bullet} /></li>)}</ul></div>)}</div></article>;
+}
+
+export function ProjectItem({ project }: { project: Project }) {
+  return <article className="project-item"><div className="project-title-row"><Link href={`/projects/${project.slug}`} className="item-link">{project.title}</Link>{project.status && <span className="badge">{project.status}</span>}</div><p className="muted">{project.description}</p></article>;
+}
+
+import type { BlogPost } from "@/lib/blog";
+export function PostItem({ post }: { post: BlogPost }) {
+  return <Link className="post-item" href={`/blog/${post.slug}`}><span>{post.title}</span><time dateTime={post.date}>{new Date(`${post.date}T12:00:00`).toLocaleDateString("en", { day: "numeric", month: "short", year: "numeric" })}</time></Link>;
+}
+
+const socials = [
+  { label: "LinkedIn", href: site.links.linkedin, icon: "in" },
+  { label: "GitHub", href: site.links.github, icon: "⌘" },
+  { label: "Email", href: `mailto:${site.email}`, icon: "✉" },
+  { label: "Resume", href: site.resume, icon: "▤" },
+];
+export function SocialLinks({ footer = false }: { footer?: boolean }) {
+  return <nav className={footer ? "social-links footer-socials" : "social-links"} aria-label={footer ? "Social links" : "Contact links"}>{socials.map((item) => item.href.startsWith("TODO") ? <span key={item.label} aria-label={`${item.label} link TODO`} title={`${item.label} URL TODO`} className="social-link social-placeholder"><span aria-hidden="true">{item.icon}</span></span> : <a key={item.label} href={item.href} aria-label={item.label} title={item.label} className="social-link" target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}><span aria-hidden="true">{item.icon}</span></a>)}</nav>;
+}
