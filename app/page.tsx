@@ -2,10 +2,9 @@ import Link from "next/link";
 import { site } from "@/data/site";
 import { experience } from "@/data/experience";
 import { projects } from "@/data/projects";
-import { getBlogPosts } from "@/lib/blog";
+// import { getBlogPosts } from "@/lib/blog";
 import {
   ExperienceItem,
-  PostItem,
   ProjectItem,
   Section,
   SocialLinks,
@@ -13,7 +12,7 @@ import {
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
-  const latestPosts = getBlogPosts().slice(0, 3);
+  // const latestPosts = getBlogPosts().slice(0, 3);
   return (
     <>
       <a className="skip-link" href="#main">
@@ -22,13 +21,33 @@ export default function Home() {
       <main id="main" className="container">
         <header className="site-header">
           <div className="header-top">
-            <h1>{site.name}</h1>
+            <div className="name-preview" tabIndex={0}>
+              <h1>{site.name}</h1>
+              <img
+                className="name-preview-image"
+                src="/site_name.webp"
+                alt=""
+                aria-hidden="true"
+              />
+            </div>
             <ThemeToggle />
           </div>
           <p className="intro">
             {site.introSegments.map((part, index) =>
               "strong" in part && part.strong ? (
-                <strong key={index}>{part.text}</strong>
+                part.text === "Banglore, Karnataka India" ? (
+                  <strong key={index} className="location-preview" tabIndex={0}>
+                    {part.text}
+                    <img
+                      className="location-preview-image"
+                      src="/banglore.webp"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                  </strong>
+                ) : (
+                  <strong key={index}>{part.text}</strong>
+                )
               ) : (
                 <span key={index}>{part.text}</span>
               ),
@@ -46,7 +65,7 @@ export default function Home() {
             <ProjectItem project={project} key={project.slug} />
           ))}
         </Section>
-        <Section title="Blog">
+        {/* <Section title="Blog">
           <div className="section-heading">
             <p className="muted">{site.blogIntro}</p>
             <Link href="/blog" className="text-link">
@@ -60,7 +79,7 @@ export default function Home() {
               TODO: Add blog posts in <code>/content/blog</code>.
             </p>
           )}
-        </Section>
+        </Section> */}
         <Section title="Skills">
           <div className="skills-list">
             {site.skills.map((group) => (
@@ -84,7 +103,12 @@ export default function Home() {
         <Section title="Let’s talk">
           <p className="contact-line">
             <strong>{site.contactPrompt}</strong>
-            <a className="text-link" href={`mailto:${site.email}`}>
+            <a
+              className="text-link"
+              href={`https://cal.com/kundan-suthar-1w1dde/15min?overlayCalendar=true`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Get in touch ↗
             </a>
           </p>

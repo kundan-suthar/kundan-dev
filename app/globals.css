@@ -393,6 +393,71 @@ li strong {
 .experience-content {
   margin-top: 8px;
 }
+.name-preview {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  outline: none;
+}
+.name-preview-image {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 12px);
+  left: 0;
+  width: 220px;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 18%);
+  opacity: 0;
+  clip-path: inset(100% 0 0 0);
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition:
+    opacity 280ms ease,
+    clip-path 480ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.name-preview:hover .name-preview-image,
+.name-preview:focus-visible .name-preview-image {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transform: translateY(0);
+}
+.location-preview {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+}
+.location-preview-image {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 12px);
+  left: 50%;
+  width: 240px;
+  height: 160px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 18%);
+  opacity: 0;
+  clip-path: inset(100% 0 0 0);
+  transform: translate(-50%, -8px);
+  pointer-events: none;
+  transition:
+    opacity 280ms ease,
+    clip-path 480ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.location-preview:hover .location-preview-image,
+.location-preview:focus-visible .location-preview-image {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transform: translate(-50%, 0);
+}
 @media (max-width: 520px) {
   .container {
     width: min(100% - 36px, 680px);
