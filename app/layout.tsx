@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/data/site";
+import { FlagsmithClientProvider } from "@/components/flagsmith-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,7 +26,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <FlagsmithClientProvider>{children}</FlagsmithClientProvider>
+      </body>
     </html>
   );
 }

@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: base },
     { url: `${base}/blog` },
     { url: `${base}/resume` },
-    ...projects.map((item) => ({ url: `${base}/projects/${item.slug}` })),
+    ...projects.map((item) => ({ url: `${base}/projects/${item.id}` })),
     ...getBlogPosts().map((item) => ({ url: `${base}/blog/${item.slug}` })),
   ];
 }

@@ -1,26 +1,39 @@
 export type Project = {
-  slug: string;
+  id: ProjectId;
   title: string;
   description: string;
   status?: "In Progress";
   liveUrl?: string;
   repoUrl?: string;
   details: string[];
-  stack: string[];
+  stack?: string[];
 };
+
+export type ProjectId = "ai_interview" | "sequence_crm" | "pdf_chatbot";
 
 export const projects: Project[] = [
   {
-    slug: "sequence-crm",
-    title: "Sequence CRM App",
+    id: "ai_interview",
+    title: "AI Interview App",
     description:
-      "A full-stack CRM for managing customer workflows with AI-powered insights.",
-    liveUrl: "TODO: Add live project URL",
-    repoUrl: "TODO: Add GitHub repository URL",
+      "Upload a resume and job description, run a 2-minute AI interview, and get a report.",
+    liveUrl: "https://interview-app-frontend-ten.vercel.app/",
     details: [
-      "Built a responsive CRM workflow interface with Next.js, React, and TypeScript, backed by FastAPI.",
-      "Designed an asynchronous FastAPI backend with SQLAlchemy 2, PostgreSQL, and Redis, including JWT authentication, structured API layers, Alembic migrations, and reusable business logic.",
-      "Integrated the OpenAI API for AI-powered CRM insights and used Docker Compose for the frontend, backend, PostgreSQL, and Redis services.",
+      "Upload a resume and job description to prepare for a role-specific interview.",
+      "Complete a 2-minute AI-led interview.",
+      "Review a generated interview report.",
+    ],
+    stack: ["React", "Tailwind CSS", "Context API", "Vercel", "CI/CD"],
+  },
+  {
+    id: "sequence_crm",
+    title: "Sequence CRM",
+    description:
+      "Track leads with role-based access control (RBAC) and generate AI meeting reports with positive, negative, or neutral sentiment.",
+    liveUrl: "https://sequence-crm.vercel.app/",
+    details: [
+      "Track leads with role-based access control (RBAC).",
+      "Generate AI meeting reports classified as positive, negative, or neutral.",
     ],
     stack: [
       "Next.js",
@@ -34,20 +47,17 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "ai-interview-bot",
-    title: "AI Interview Bot",
+    id: "pdf_chatbot",
+    title: "PDF Chatbot",
     description:
-      "A mobile-first app for role-specific interview practice and mock interviews.",
-    liveUrl: "TODO: Add live project URL",
-    repoUrl: "TODO: Add GitHub repository URL",
+      "Upload a PDF and chat with its content using retrieval-augmented generation (RAG).",
+    liveUrl: "https://rag-pdf-client.vercel.app/",
     details: [
-      "Built role-specific question generation for frontend, full-stack, and MERN interview preparation, plus mock interview simulations.",
-      "Created interactive React components with Tailwind CSS and Context API, then deployed on Vercel with CI/CD.",
-      "Designed a reusable component architecture that reduced code duplication by ==~40%== across interview tracks.",
+      "Upload a PDF document.",
+      "Ask questions and chat with the document's content using RAG.",
     ],
-    stack: ["React", "Tailwind CSS", "Context API", "Vercel", "CI/CD"],
   },
 ];
 
 export const getProject = (slug: string) =>
-  projects.find((project) => project.slug === slug);
+  projects.find((project) => project.id === slug);

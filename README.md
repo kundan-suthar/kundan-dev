@@ -20,6 +20,16 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Featured project experiment
+
+**Hypothesis:** featuring different portfolio projects on the homepage changes which project visitors open.
+
+The homepage uses the Flagsmith multivariate flag `featured_project`: `ai_interview` is the control value, with `sequence_crm` and `pdf_chatbot` as variations. The assigned project is listed first, followed by the remaining projects in their default order; all cards use the same component and styling. Configure `NEXT_PUBLIC_FLAGSMITH_ENV_ID` in `.env.local` with your Flagsmith environment ID before running the app.
+
+The app records `project_opened`, `live_demo_clicked`, and `contact_clicked` events. Add `?preview` to a URL to preview the control layout without initializing Flagsmith or recording experiment exposures or events.
+
+Run the app with `npm run dev`, then open [http://localhost:3000](http://localhost:3000).
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

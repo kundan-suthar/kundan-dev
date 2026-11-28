@@ -1,21 +1,20 @@
 import { Suspense } from "react";
-import Link from "next/link";
 import { io } from "next/cache";
 import { site } from "@/data/site";
 import { experience } from "@/data/experience";
-import { projects } from "@/data/projects";
 // import { getBlogPosts } from "@/lib/blog";
-import {
-  ExperienceItem,
-  ProjectItem,
-  Section,
-  SocialLinks,
-} from "@/components/portfolio";
+import { ExperienceItem, Section, SocialLinks } from "@/components/portfolio";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { ExperimentProjects } from "@/components/experiment-projects";
+import { TrackedLink } from "@/components/tracked-link";
 
 async function CopyrightYear() {
   await io();
-  return <p>© {new Date().getFullYear()} {site.name}</p>;
+  return (
+    <p>
+      © {new Date().getFullYear()} {site.name}
+    </p>
+  );
 }
 
 export default function Home() {
@@ -67,11 +66,7 @@ export default function Home() {
             <ExperienceItem item={item} key={item.company} />
           ))}
         </Section>
-        <Section title="Projects">
-          {projects.map((project) => (
-            <ProjectItem project={project} key={project.slug} />
-          ))}
-        </Section>
+        <ExperimentProjects />
         {/* <Section title="Blog">
           <div className="section-heading">
             <p className="muted">{site.blogIntro}</p>
@@ -110,14 +105,15 @@ export default function Home() {
         <Section title="Let’s talk">
           <p className="contact-line">
             <strong>{site.contactPrompt}</strong>
-            <a
+            <TrackedLink
               className="text-link"
+              eventName="contact_clicked"
               href={`https://cal.com/kundan-suthar-1w1dde/15min?overlayCalendar=true`}
               target="_blank"
               rel="noopener noreferrer"
             >
               Get in touch ↗
-            </a>
+            </TrackedLink>
           </p>
         </Section>
         <footer className="site-footer">
@@ -125,9 +121,13 @@ export default function Home() {
           <Suspense fallback={<p>© {site.name}</p>}>
             <CopyrightYear />
           </Suspense>
-          <Link className="text-link" href="/resume">
+          <TrackedLink
+            className="text-link"
+            eventName="contact_clicked"
+            href="/resume"
+          >
             Resume
-          </Link>
+          </TrackedLink>
         </footer>
       </main>
     </>

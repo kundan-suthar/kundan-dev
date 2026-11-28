@@ -5,7 +5,7 @@ import { IoDocumentTextSharp } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { site } from "@/data/site";
 import type { Experience } from "@/data/experience";
-import type { Project } from "@/data/projects";
+import { TrackedLink } from "@/components/tracked-link";
 
 export function Section({
   title,
@@ -101,24 +101,6 @@ export function ExperienceItem({ item }: { item: Experience }) {
   );
 }
 
-export function ProjectItem({ project }: { project: Project }) {
-  return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className="project-item"
-      aria-label={`View ${project.title} project`}
-    >
-      <article>
-        <div className="project-title-row">
-          <span className="item-link">{project.title}</span>
-          {project.status && <span className="badge">{project.status}</span>}
-        </div>
-        <p className="muted">{project.description}</p>
-      </article>
-    </Link>
-  );
-}
-
 import type { BlogPost } from "@/lib/blog";
 export function PostItem({ post }: { post: BlogPost }) {
   return (
@@ -157,6 +139,19 @@ export function SocialLinks({ footer = false }: { footer?: boolean }) {
           >
             <span aria-hidden="true">{item.icon}</span>
           </span>
+        ) : ["LinkedIn", "Email", "Resume"].includes(item.label) ? (
+          <TrackedLink
+            key={item.label}
+            href={item.href}
+            aria-label={item.label}
+            title={item.label}
+            className="social-link"
+            target="_blank"
+            rel="noreferrer"
+            eventName="contact_clicked"
+          >
+            <span aria-hidden="true">{item.icon}</span>
+          </TrackedLink>
         ) : (
           <a
             key={item.label}

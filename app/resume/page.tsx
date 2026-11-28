@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/data/site";
+import { TrackedLink } from "@/components/tracked-link";
 export const metadata: Metadata = {
   title: "Resume",
   description: "Resume of Kundan Suthar, Software Engineer.",
@@ -16,9 +17,14 @@ export default function ResumePage() {
         {site.name} · {site.headline}
       </p>
       <p>
-        <a className="text-link" href={site.resume}>
+        <TrackedLink
+          className="text-link"
+          href={site.resume}
+          target="_blank"
+          eventName="contact_clicked"
+        >
           Download resume (PDF) ↗
-        </a>
+        </TrackedLink>
       </p>
       <iframe
         className="resume-frame"
